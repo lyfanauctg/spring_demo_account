@@ -25,7 +25,6 @@ public class AccountServiceImpl implements AccountService {
         Account from = accountRepository.findById(fromId)
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
-        from.setBalance(1000.00);
 
         log.info("from Account {}" , fromId);
 
@@ -34,14 +33,30 @@ public class AccountServiceImpl implements AccountService {
 
         log.info("to Account: {}", toId);
 
+        if(amount < 0){
+            throw new RuntimeException("Amount should be greater than 0");
+        }
+
+
         if(from.getBalance() < amount){
             throw new RuntimeException("Not enough balance");
         }
 
+        log.info("Money before transfer: {}", from.getBalance());
         from.setBalance(from.getBalance() - amount);
+        accountRepository.save(from);
+
+        log.info("Money after exception occur: {}", from.getBalance());
+
+
+        if (amount > 500){
+            throw new RuntimeException("Roll back");
+        }
+
+        log.info("Money after rollback: {}", from.getBalance());
+
         to.setBalance(to.getBalance() + amount);
 
-        accountRepository.save(from);
         accountRepository.save(to);
 
     }
@@ -49,5 +64,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> getAllAccount() {
         return accountRepository.findAll();
+    }
+
+    @Override
+    public Account findAccountById(Long id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found !!!"));
     }
 }

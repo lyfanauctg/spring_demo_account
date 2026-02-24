@@ -11,4 +11,6 @@ public interface AccountService {
     void transfer(Long fromId, Long toId, double amount);
 
     List<Account> getAllAccount();
+
+    Account findAccountById(Long id);
 }

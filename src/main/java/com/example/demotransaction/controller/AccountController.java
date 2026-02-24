@@ -25,5 +25,11 @@ public class AccountController {
         return accountService.getAllAccount();
     }
 
+    @GetMapping("/{id}")
+    public Account getAccountById(@PathVariable("id") Long id){
+        return accountService.findAccountById(id);
+    }
+
+
 
 }

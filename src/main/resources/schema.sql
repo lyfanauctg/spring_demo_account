@@ -6,8 +6,8 @@ CREATE TABLE accounts(
     balance DECIMAL(19,2) NOT NULL
 );
 
-INSERT INTO accounts (accounts.owner_name, accounts.balance) VALUES ('Alice Senior', 1000.00);
-INSERT INTO accounts (accounts.owner_name, accounts.balance) VALUES ('Bob Junior', 500.00);
-INSERT INTO accounts (accounts.owner_name, accounts.balance) VALUES ('Charlie Tester', 0.00);
-
+INSERT INTO accounts (owner_name, balance) VALUES ('Alice Senior', 1000.00);
+INSERT INTO accounts (owner_name, balance) VALUES ('Bob Junior', 500.00);
+INSERT INTO accounts (owner_name, balance) VALUES ('Charlie Tester', 0.00);
+åç
 SELECT * FROM accounts;
